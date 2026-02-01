@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Preview Import{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Preview</h1>
+  {% if errors %}
+    <div class="errors">
+      <h3>Errors</h3>
+      <ul>
+      {% for e in errors %}
+        <li>Row {{e[0]}}: {{e[1]}}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <table class="preview">
+    <tr><th>Title</th><th>Category</th><th>Task</th><th>Date</th><th>Description</th></tr>
+    {% for r in rows %}
+      <tr>
+        <td>{{r.title}}</td>
+        <td>{{r.category or ''}}</td>
+        <td>{{r.task_name}}</td>
+        <td>{{r.date}}</td>
+        <td>{{r.description}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <form method="post" action="/import/commit">
+    <input type="hidden" name="rows_json" value='{{ rows_json|e }}' />
+    <button type="submit">Import</button>
+  </form>
+</div>
+{% endblock %}

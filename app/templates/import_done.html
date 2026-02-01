@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Import Done{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Import Complete</h1>
+  <p>Projects created: {{projects_created}}</p>
+  <p>Timeline items created: {{items_created}}</p>
+  <a href="/">Back to projects</a>
+</div>
+{% endblock %}

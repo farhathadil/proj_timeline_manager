@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{project.title}}{% endblock %}
+{% block content %}
+<div class="container detail">
+  <a class="back" href="/">← Back</a>
+  <h1>{{project.title}}</h1>
+  <div class="meta">{{project.category or 'Uncategorized'}} • {{project.task_name}}</div>
+
+  <section class="gantt">
+    <svg id="gantt" width="100%" height="60" viewBox="0 0 100 60" preserveAspectRatio="none">
+      {% if timeline %}
+        {% set dates = timeline|map(attribute='date')|list %}
+        {% set min_date = dates|min %}
+        {% set max_date = dates|max %}
+        {% set min_ts = min_date.toordinal() %}
+        {% set max_ts = max_date.toordinal() %}
+        {% set range = (max_ts - min_ts) if max_ts>min_ts else 1 %}
+        {% for t in timeline %}
+          {% set x = ((t.date.toordinal() - min_ts) / range) * 96 + 2 %}
+          <rect x="{{x}}" y="20" width="4" height="20" class="marker" data-desc="{{t.description}}"></rect>
+        {% endfor %}
+      {% else %}
+        <text x="50" y="30" text-anchor="middle" fill="#999">No timeline</text>
+      {% endif %}
+    </svg>
+  </section>
+
+  <section class="timeline">
+    <h2>Timeline</h2>
+    <ul>
+      {% for t in timeline %}
+        <li>{{t.date}} — {{t.description}}</li>
+      {% else %}
+        <li>No items</li>
+      {% endfor %}
+    </ul>
+    <form method="post" action="/project/{{project.id}}/timeline/add" class="addform">
+      <input name="date" type="date" required />
+      <input name="description" placeholder="Description" required />
+      <button type="submit">Add</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

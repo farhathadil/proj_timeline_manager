@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<div class="container">
+  <form method="get" class="searchbar">
+    <input name="q" placeholder="Search" value="{{ q }}" />
+    <select name="category">
+      <option value="">All</option>
+      {% for c in categories %}
+      <option value="{{c}}" {% if c==category %}selected{% endif %}>{{c}}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+    <a class="smallbtn" href="/import">Import CSV</a>
+  </form>
+
+  <div class="list">
+    {% for it in projects %}
+      {% set p = it.project %}
+      <a class="card" href="/project/{{p.id}}">
+        <div class="card-title">{{p.title}}</div>
+        <div class="card-meta">{{p.category or 'Uncategorized'}} • {{p.task_name}}</div>
+        <div class="card-span">{% if it.span %}{{it.span[0]}} → {{it.span[1]}}{% else %}No timeline{% endif %}</div>
+      </a>
+    {% else %}
+      <div>No projects</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

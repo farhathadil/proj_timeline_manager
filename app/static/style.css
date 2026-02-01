@@ -1,0 +1,25 @@
+:root{--bg:#0b0f12;--card:#0f1416;--muted:#9aa6ad;--accent:#08f}
+html,body{height:100%;margin:0;background:var(--bg);color:#e6eef3;font-family:Inter,system-ui,Segoe UI,Arial}
+.topbar{padding:12px 16px;background:#071018;font-weight:600}
+.botbar{padding:8px 12px;text-align:center;color:var(--muted);font-size:13px}
+.container{padding:12px;max-width:760px;margin:0 auto}
+.searchbar{display:flex;gap:8px;margin-bottom:12px}
+.searchbar input,.searchbar select{flex:1;padding:10px;border-radius:8px;border:1px solid #222;background:#081016;color:inherit}
+.smallbtn{background:transparent;color:var(--accent);padding:8px;text-decoration:none}
+.list{display:grid;gap:10px}
+.card{display:block;padding:12px;background:var(--card);border-radius:10px;text-decoration:none;color:inherit}
+.card-title{font-weight:700}
+.card-meta{color:var(--muted);font-size:13px}
+.card-span{color:var(--muted);font-size:12px}
+.detail .meta{color:var(--muted);margin-bottom:8px}
+.gantt{margin:8px 0}
+.marker{fill:var(--accent);rx:1}
+.timeline ul{padding-left:18px}
+.addform{display:flex;gap:8px;margin-top:8px}
+.addform input{padding:8px;border-radius:8px;border:1px solid #222;background:#081016;color:inherit}
+.addform button{padding:10px;border-radius:8px;background:var(--accent);color:#001}
+table.preview{width:100%;border-collapse:collapse}
+table.preview th,table.preview td{border:1px solid #222;padding:6px}
+.errors{background:#2b0a0a;padding:8px;border-radius:8px;margin-bottom:8px}
+
+@media(min-width:600px){.container{padding:24px}}
